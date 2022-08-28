@@ -7,11 +7,16 @@ const completedAnimation = {
   closed: { opacity: 1 },
 };
 
+const strikeThroughAnimation = {
+  openStrikeThrough: { width: "100%" },
+  closeStrikeThrough: { width: 0 },
+};
+
 const AnimatedTaskLabel = () => {
   const [checked, setChecked] = useState(false);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait" initial={false}>
       <Checkbox
         checked={checked}
         onChange={() => setChecked((checked) => !checked)}
@@ -22,26 +27,30 @@ const AnimatedTaskLabel = () => {
         style={{ position: "relative" }}
         initial={{ opacity: 1 }}
         animate={checked ? "open" : "closed"}
-        transition={{ type: "spring", stiffness: 100, duration: 0.5 }}
+        transition={{ type: "spring", stiffness: 100, duration: 0.4 }}
         variants={completedAnimation}
       >
         <Text
+          noOfLines={1}
           color={useColorModeValue("gray.700", "whiteAlpha.800")}
           fontWeight={"bold"}
           letterSpacing={"widest"}
           fontSize={"xl"}
         >
-          Go to a Cafe
+          Task Item
         </Text>
+
         <motion.div
           style={{
-            backgroundColor: "gray.700",
+            backgroundColor: "black",
             position: "absolute",
             top: 16,
+            height: 2,
           }}
-          initial={{ width: 0, height: 2 }}
-          animate={{ width: "100%", height: 2 }}
-          transition={{ type: "spring", stiffness: 100 }}
+          initial={{ width: 0 }}
+          animate={checked ? "openStrikeThrough" : "closeStrikeThrough"}
+          variants={strikeThroughAnimation}
+          transition={{ duration: 0.2 }}
         />
       </motion.div>
     </AnimatePresence>

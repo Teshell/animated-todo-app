@@ -5,7 +5,7 @@ import AnimatedTaskLabel from "./animated-task-label";
 
 const TaskItem = () => {
   return (
-    <AnimatePresence>
+    <AnimatePresence initial={false}>
       <motion.div
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

@@ -5,6 +5,7 @@ import { IconButton, useColorMode, useColorModeValue } from "@chakra-ui/react";
 
 function ToggleTheme() {
   const { toggleColorMode } = useColorMode();
+
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
