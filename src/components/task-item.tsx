@@ -1,6 +1,18 @@
-import { Checkbox, Input, Stack, useColorModeValue } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import { useCallback, useState } from "react";
+
+import { Icon } from "@chakra-ui/icons";
+import { BsTrash } from "react-icons/bs";
+
+import { motion } from "framer-motion";
+
+import {
+  Box,
+  Checkbox,
+  IconButton,
+  Input,
+  Stack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
 import AnimatedTaskLabel from "./animated-task-label";
 
@@ -10,6 +22,7 @@ interface TaskItemProps {
   done: boolean;
   onSubjectChange: (id: number, newSubject: string) => void;
   onToggleCheckbox: (id: number) => void;
+  onDeleteItem: (id: number) => void;
 }
 
 const TaskItem = ({
@@ -18,6 +31,7 @@ const TaskItem = ({
   done,
   onSubjectChange,
   onToggleCheckbox,
+  onDeleteItem,
 }: TaskItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -32,57 +46,73 @@ const TaskItem = ({
     onToggleCheckbox(id);
   }, [id, onToggleCheckbox]);
 
+  const handleDeleteItem = useCallback(() => {
+    onDeleteItem(id);
+  }, [id, onDeleteItem]);
+
   return (
     <motion.div
-      style={{ overflow: "hidden", marginBottom: "10px" }}
+      style={{
+        overflow: "hidden",
+        marginBottom: "10px",
+      }}
       initial={{ y: -30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ x: -50, opacity: 0 }}
       transition={{ delay: 0.4 }}
     >
       <Stack
-        spacing={2}
-        direction="row"
+        direction={"row"}
+        justifyContent="space-between"
         px={4}
         py={3}
         w="full"
-        align={"center"}
         bg={useColorModeValue("gray.100", "dark.secondary")}
         borderRadius={"3xl"}
       >
-        <Checkbox
-          checked={done}
-          onChange={() => handleToggleCheckbox()}
-          size="lg"
-          colorScheme="orange"
-        />
-
-        {isEditing ? (
-          <Input
-            variant={"unstyled"}
-            fontWeight={"bold"}
-            letterSpacing={"wide"}
-            fontSize={"xl"}
-            noOfLines={1}
-            value={subject}
-            autoFocus
-            blur={done}
-            onBlur={() => setIsEditing(false)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                setIsEditing(false);
-              }
-            }}
-            onChange={(e) => handleSubjectChange(e.target.value)}
+        <Stack spacing={2} direction="row">
+          <Checkbox
+            checked={done}
+            onChange={() => handleToggleCheckbox()}
+            size="lg"
+            colorScheme="orange"
           />
-        ) : (
-          <AnimatedTaskLabel
-            strikeThrough={done}
-            onClick={() => setIsEditing(true)}
-          >
-            {subject}
-          </AnimatedTaskLabel>
-        )}
+
+          {isEditing ? (
+            <Input
+              variant={"unstyled"}
+              fontWeight={"bold"}
+              letterSpacing={"wide"}
+              fontSize={"xl"}
+              noOfLines={1}
+              value={subject}
+              autoFocus
+              blur={done}
+              onBlur={() => setIsEditing(false)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setIsEditing(false);
+                }
+              }}
+              onChange={(e) => handleSubjectChange(e.target.value)}
+            />
+          ) : (
+            <AnimatedTaskLabel
+              strikeThrough={done}
+              onClick={() => setIsEditing(true)}
+            >
+              {subject}
+            </AnimatedTaskLabel>
+          )}
+        </Stack>
+
+        <IconButton
+          size={"sm"}
+          aria-label="Delete Task"
+          onClick={() => handleDeleteItem()}
+        >
+          <Icon as={BsTrash} />
+        </IconButton>
       </Stack>
     </motion.div>
   );

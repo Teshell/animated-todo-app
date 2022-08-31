@@ -10,7 +10,7 @@ function App() {
       justify="center"
       direction={"column"}
       bg={useColorModeValue("whiteAlpha.200", "dark.primary")}
-      height={"100%"}
+      height={"100vh"}
       p={3}
     >
       <ToggleTheme />

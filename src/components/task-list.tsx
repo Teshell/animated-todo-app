@@ -19,59 +19,6 @@ const initialData = [
     subject: "Work",
     done: false,
   },
-
-  {
-    id: 4,
-    subject: "Gym",
-    done: false,
-  },
-
-  {
-    id: 5,
-    subject: "Go to a Cafe",
-    done: false,
-  },
-
-  {
-    id: 6,
-    subject: "Workout",
-    done: false,
-  },
-
-  {
-    id: 7,
-    subject: "Work",
-    done: false,
-  },
-
-  {
-    id: 8,
-    subject: "Gym",
-    done: false,
-  },
-  {
-    id: 9,
-    subject: "Go to a Cafe",
-    done: false,
-  },
-
-  {
-    id: 10,
-    subject: "Workout",
-    done: false,
-  },
-
-  {
-    id: 11,
-    subject: "Work",
-    done: false,
-  },
-
-  {
-    id: 12,
-    subject: "Gym",
-    done: false,
-  },
 ];
 
 const TaskList = () => {
@@ -107,6 +54,17 @@ const TaskList = () => {
     });
   }, []);
 
+  const handleDeleteItem = useCallback((id: number) => {
+    setData((prevData) => {
+      const index = prevData.findIndex((e) => e.id === id);
+      const item = prevData[index];
+
+      const newData = prevData.filter((i) => i !== item);
+
+      return newData;
+    });
+  }, []);
+
   return (
     <>
       {data.map((task) => (
@@ -116,6 +74,7 @@ const TaskList = () => {
           subject={task.subject}
           onSubjectChange={handleSubjectChange}
           onToggleCheckbox={handleCheckbox}
+          onDeleteItem={handleDeleteItem}
         />
       ))}
     </>
