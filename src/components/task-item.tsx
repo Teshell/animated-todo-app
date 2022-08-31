@@ -6,7 +6,6 @@ import { BsTrash } from "react-icons/bs";
 import { motion } from "framer-motion";
 
 import {
-  Box,
   Checkbox,
   IconButton,
   Input,
@@ -70,7 +69,7 @@ const TaskItem = ({
         bg={useColorModeValue("gray.100", "dark.secondary")}
         borderRadius={"3xl"}
       >
-        <Stack spacing={2} direction="row">
+        <Stack spacing={2} direction="row" w="80">
           <Checkbox
             checked={done}
             onChange={() => handleToggleCheckbox()}
