@@ -71,7 +71,7 @@ const TaskItem = ({
       >
         <Stack spacing={2} direction="row" w="80">
           <Checkbox
-            checked={done}
+            isChecked={done}
             onChange={() => handleToggleCheckbox()}
             size="lg"
             colorScheme="orange"

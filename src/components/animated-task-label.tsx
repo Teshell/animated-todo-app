@@ -13,7 +13,7 @@ const textBounceAnimation = {
 };
 
 const strikeThroughAnimation = {
-  openStrikeThrough: { width: "100%", opacity: 0.6 },
+  openStrikeThrough: { width: "95%", opacity: 0.6 },
   closeStrikeThrough: { width: 0 },
 };
 
