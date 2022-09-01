@@ -3,9 +3,10 @@ import { useCallback, useState } from "react";
 import { Icon } from "@chakra-ui/icons";
 import { BsTrash } from "react-icons/bs";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import {
+  Box,
   Checkbox,
   IconButton,
   Input,
@@ -50,16 +51,7 @@ const TaskItem = ({
   }, [id, onDeleteItem]);
 
   return (
-    <motion.div
-      style={{
-        overflow: "hidden",
-        marginBottom: "10px",
-      }}
-      initial={{ y: -30, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ x: -50, opacity: 0 }}
-      transition={{ delay: 0.4 }}
-    >
+    <Box overflow={"hidden"} mb={2}>
       <Stack
         direction={"row"}
         justifyContent="space-between"
@@ -113,7 +105,7 @@ const TaskItem = ({
           <Icon as={BsTrash} />
         </IconButton>
       </Stack>
-    </motion.div>
+    </Box>
   );
 };
 

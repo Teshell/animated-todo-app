@@ -1,3 +1,5 @@
+import { motion, AnimatePresence } from "framer-motion";
+
 import { useCallback, useState } from "react";
 import TaskItem from "./task-item";
 
@@ -66,18 +68,24 @@ const TaskList = () => {
   }, []);
 
   return (
-    <>
+    <AnimatePresence>
       {data.map((task) => (
-        <TaskItem
-          id={task.id}
-          done={task.done}
-          subject={task.subject}
-          onSubjectChange={handleSubjectChange}
-          onToggleCheckbox={handleCheckbox}
-          onDeleteItem={handleDeleteItem}
-        />
+        <motion.div
+          key={task.id}
+          exit={{ x: -50, opacity: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <TaskItem
+            id={task.id}
+            done={task.done}
+            subject={task.subject}
+            onSubjectChange={handleSubjectChange}
+            onToggleCheckbox={handleCheckbox}
+            onDeleteItem={handleDeleteItem}
+          />
+        </motion.div>
       ))}
-    </>
+    </AnimatePresence>
   );
 };
 
