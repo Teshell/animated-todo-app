@@ -3,8 +3,6 @@ import { useCallback, useState } from "react";
 import { Icon } from "@chakra-ui/icons";
 import { BsTrash } from "react-icons/bs";
 
-import { AnimatePresence, motion } from "framer-motion";
-
 import {
   Box,
   Checkbox,
@@ -17,12 +15,12 @@ import {
 import AnimatedTaskLabel from "./animated-task-label";
 
 interface TaskItemProps {
-  id: number;
+  id: string;
   subject: string;
   done: boolean;
-  onSubjectChange: (id: number, newSubject: string) => void;
-  onToggleCheckbox: (id: number) => void;
-  onDeleteItem: (id: number) => void;
+  onSubjectChange: (id: string, newSubject: string) => void;
+  onToggleCheckbox: (id: string) => void;
+  onDeleteItem: (id: string) => void;
 }
 
 const TaskItem = ({
@@ -77,6 +75,7 @@ const TaskItem = ({
               fontSize={"xl"}
               noOfLines={1}
               value={subject}
+              placeholder="Task"
               autoFocus
               blur={done}
               onBlur={() => setIsEditing(false)}

@@ -13,7 +13,7 @@ const textBounceAnimation = {
 };
 
 const strikeThroughAnimation = {
-  openStrikeThrough: { width: "95%", opacity: 0.6 },
+  openStrikeThrough: { width: "100%", opacity: 0.6 },
   closeStrikeThrough: { width: 0 },
 };
 
@@ -29,6 +29,7 @@ const AnimatedTaskLabel = ({ strikeThrough, children, onClick }: Props) => {
       <Text
         cursor={"pointer"}
         title={"Edit this task"}
+        maxW={"96"}
         noOfLines={1}
         color={useColorModeValue("gray.700", "whiteAlpha.800")}
         fontWeight={"bold"}
